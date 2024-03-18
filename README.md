@@ -6,7 +6,7 @@
 
 - [Showcase](#showcase)
 - [How to install it](#installation)
-  - [Using setup](#using-prebuilt-binaries)
+  - [Using setup](#using-setup)
   - [Building from source](#building-from-source)
 - [Features](#features)
 - [FAQ](#faq)
@@ -14,18 +14,17 @@
 Emora is an OSINT tool like sherlock, which can find out on which sites a username is claimed or not.
 
 ## Showcase
-![Emora Showcase](https://raw.githubusercontent.com/Prescoter/Emora-Project/master/EmoraShowcase.gif)
+![Emora Showcase](https://raw.githubusercontent.com/Prescoter/Emora-Project/main/EmoraShowcase.gif)
 
 ## Installation
 
 ### Using setup
 
-If you don't want to or can't build the software yourself, you can download its setup [here](https://github.com/Prescoter/Emora-Project/releases)
+If you don't want to or can't build the software yourself, you can download its setup [here](https://github.com/Prescoter/Emora-Project/releases/download/v1.0/EmoraSetup.exe)
 
 ### Building from source
 
-In order to build the software, you need to install **Visual Studio 2022 or**
-higher (or maybe Rider). You can find Visual Studio at https://visualstudio.microsoft.com/.
+In order to build the software, you need to install **Visual Studio 2022 or** higher (or maybe Rider). You can find Visual Studio at https://visualstudio.microsoft.com/.
 
 ## Features
 
