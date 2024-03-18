@@ -34,10 +34,10 @@ In order to build the software, you need to install **Visual Studio 2022 or** hi
 
 ## FAQ
 
-Q: When I try to open the software, a message saying "This app can't run on your PC" appears.
+Q: When I try to open the software, a message saying "This app can't run on your PC" appears.  
 A: The compiled version of the project only supports 64bit computers, but you can still try to build it from source.
 
-Q: Antivirus flags your files
+Q: Antivirus flags your files  
 A: I don't have the money to pay for a 3yr Digicert Certificate to sign all of my Windows binaries, even if I did, would it be a waste? (EXEs are currently unsigned)
 
 ## Star History
