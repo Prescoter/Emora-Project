@@ -150,6 +150,18 @@
             this.imageList1.Images.SetKeyName(31, "SourceForge");
             this.imageList1.Images.SetKeyName(32, "TryHackMe");
             this.imageList1.Images.SetKeyName(33, "Wikipedia");
+            this.imageList1.Images.SetKeyName(34, "Medium");
+            this.imageList1.Images.SetKeyName(35, "Instagram");
+            this.imageList1.Images.SetKeyName(36, "AllMyLinks");
+            this.imageList1.Images.SetKeyName(37, "Buy Me a Coffee");
+            this.imageList1.Images.SetKeyName(38, "BuzzFeed");
+            this.imageList1.Images.SetKeyName(39, "Cash APP");
+            this.imageList1.Images.SetKeyName(40, "Ebay");
+            this.imageList1.Images.SetKeyName(41, "JsFiddle");
+            this.imageList1.Images.SetKeyName(42, "Linktree");
+            this.imageList1.Images.SetKeyName(43, "Pinterest");
+            this.imageList1.Images.SetKeyName(44, "Rapid API");
+            this.imageList1.Images.SetKeyName(45, "TradingView");
             // 
             // label1
             // 

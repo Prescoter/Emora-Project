@@ -19,7 +19,7 @@ namespace Emora
             public string Url { get; set; }
         }
 
-        private Dictionary<string, WebsiteInfo> websites = new Dictionary<string, WebsiteInfo>
+        private readonly Dictionary<string, WebsiteInfo> websites = new Dictionary<string, WebsiteInfo>
         {
             {"About.me", new WebsiteInfo {ErrorType = "status_code", Url = "https://about.me/{}"}},
             {"Chess", new WebsiteInfo {ErrorType = "status_code", Url = "https://www.chess.com/member/{}"}},
@@ -54,11 +54,22 @@ namespace Emora
             {"TryHackMe", new WebsiteInfo {ErrorType = "message", ErrorMessage = "<title>TryHackMe</title>", Url = "https://tryhackme.com/p/{}"}},
             {"Vimeo", new WebsiteInfo {ErrorType = "status_code", Url = "https://vimeo.com/{}"}},
             {"Wattpad", new WebsiteInfo {ErrorType = "status_code", Url = "https://www.wattpad.com/user/{}"}},
-            {"Wikipedia", new WebsiteInfo {ErrorType = "message", ErrorMessage = "(centralauth-admin-nonexistent:", Url = "https://en.wikipedia.org/wiki/Special:CentralAuth/{}?uselang=qqx"}}
+            {"Wikipedia", new WebsiteInfo {ErrorType = "message", ErrorMessage = "(centralauth-admin-nonexistent:", Url = "https://en.wikipedia.org/wiki/Special:CentralAuth/{}?uselang=qqx"}},
+            {"AllMyLinks", new WebsiteInfo {ErrorType = "status_code", Url = "https://allmylinks.com/{}"}},
+            {"Buy Me a Coffee", new WebsiteInfo {ErrorType = "status_code", Url = "https://www.buymeacoffee.com/{}"}},
+            {"BuzzFeed", new WebsiteInfo {ErrorType = "status_code", Url = "https://www.buzzfeed.com/{}"}},
+            {"Cash APP", new WebsiteInfo {ErrorType = "status_code", Url = "https://cash.app/${}"}},
+            {"Ebay", new WebsiteInfo {ErrorType = "message", Url = "https://www.ebay.com/usr/{}"}},
+            {"Instagram", new WebsiteInfo {ErrorType = "status_code", Url = "https://www.picuki.com/profile/{}"}},
+            {"JsFiddle", new WebsiteInfo {ErrorType = "status_code", Url = "https://jsfiddle.net/user/{}/"}},
+            {"Linktree", new WebsiteInfo {ErrorType = "message", ErrorMessage = "\"statusCode\":404", Url = "https://linktr.ee/{}"}},
+            {"Medium", new WebsiteInfo {ErrorType = "message", ErrorMessage = "<span class=\"fs\">404</span>", Url = "https://{}.medium.com/about"}},
+            {"Pinterest", new WebsiteInfo {ErrorType = "message", ErrorMessage = "<title></title>", Url = "https://pinterest.com/{}/"}},
+            {"Rapid API", new WebsiteInfo {ErrorType = "status_code", Url = "https://rapidapi.com/user/{}"}},
+            {"TradingView", new WebsiteInfo {ErrorType = "status_code", Url = "https://www.tradingview.com/u/{}/"}},
         };
         private int Checked = 0;
         private int Results = 0;
-
         public Form1()
         {
             InitializeComponent();
@@ -106,7 +117,7 @@ namespace Emora
 
             using (var httpClient = new HttpClient())
             {
-                httpClient.DefaultRequestHeaders.UserAgent.ParseAdd("Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:123.0) Gecko/20100101 Firefox/123.0");
+                httpClient.DefaultRequestHeaders.UserAgent.ParseAdd("Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:124.0) Gecko/20100101 Firefox/124.0");
                 var tasks = new List<Task>();
                 var semaphore = new SemaphoreSlim((int)numericUpDown1.Value);
 
@@ -132,7 +143,7 @@ namespace Emora
                     tasks.Add(task);
                 }
                 await Task.WhenAll(tasks);
-                this.Text = $"Emora | {Results} accounts found for {username}";
+                Text = $"Emora | {Results} accounts found for {username}";
                 stopwatch.Stop();
                 label1.Text = $"{Results} accounts found for {username} in {stopwatch.ElapsedMilliseconds / 1000.0} seconds";
                 btn_search.Enabled = true;
@@ -148,7 +159,7 @@ namespace Emora
                 var response = await httpClient.GetAsync(url);
                 if (websiteInfo.ErrorType == "status_code")
                 {
-                    if (response.StatusCode >= HttpStatusCode.OK && response.StatusCode < HttpStatusCode.BadRequest)
+                    if (response.StatusCode >= HttpStatusCode.OK && response.StatusCode < HttpStatusCode.Redirect)
                     {
                         AddResult(websiteName, url);
                     }
@@ -158,6 +169,7 @@ namespace Emora
                     var content = await response.Content.ReadAsStringAsync();
                     if (!content.Contains(websiteInfo.ErrorMessage))
                     {
+                        MessageBox.Show(content);
                         AddResult(websiteName, url);
                     }
                 }
@@ -168,37 +180,45 @@ namespace Emora
         private void AddResult(string websiteName, string url)
         {
             Results++;
-            var panel = new Panel();
-            panel.Dock = DockStyle.Fill;
-            panel.Height = 80;
-            panel.BackColor = Color.FromArgb(66, 66, 66);
-            panel.BorderStyle = BorderStyle.None;
-            panel.TabIndex = tableLayoutPanel1.Controls.Count;
+            var panel = new Panel
+            {
+                Dock = DockStyle.Fill,
+                Height = 80,
+                BackColor = Color.FromArgb(66, 66, 66),
+                BorderStyle = BorderStyle.None,
+                TabIndex = tableLayoutPanel1.Controls.Count
+            };
 
-            PictureBox pictureBox = new PictureBox();
-            pictureBox.Image = imageList1.Images[imageList1.Images.IndexOfKey(websiteName)];
-            pictureBox.Size = new Size(64, 64);
-            pictureBox.SizeMode = PictureBoxSizeMode.Zoom;
+            PictureBox pictureBox = new PictureBox
+            {
+                Image = imageList1.Images[imageList1.Images.IndexOfKey(websiteName)],
+                Size = new Size(64, 64),
+                SizeMode = PictureBoxSizeMode.Zoom
+            };
             pictureBox.Location = new Point((panel.Width - pictureBox.Width) / 8, (panel.Height - pictureBox.Height) / 2);
 
-            var label = new Label();
-            label.Text = websiteName;
-            label.AutoSize = true;
+            var label = new Label
+            {
+                Text = websiteName,
+                AutoSize = true
+            };
             label.Location = new Point(pictureBox.Right + 10, (panel.Height - label.Height) / 3);
             label.Font = new Font(this.Font.FontFamily, 18);
 
-            panel.Click += (sender, e) => System.Diagnostics.Process.Start(url);
+            panel.Click += (sender, e) => Process.Start(url);
             panel.Cursor = Cursors.Hand;
-            pictureBox.Click += (sender, e) => System.Diagnostics.Process.Start(new Uri(url).GetLeftPart(UriPartial.Authority));
+            pictureBox.Click += (sender, e) => Process.Start(new Uri(url).GetLeftPart(UriPartial.Authority));
             pictureBox.Cursor = Cursors.Hand;
-            label.Click += (sender, e) => System.Diagnostics.Process.Start(new Uri(url).GetLeftPart(UriPartial.Authority));
+            label.Click += (sender, e) => Process.Start(new Uri(url).GetLeftPart(UriPartial.Authority));
             label.Cursor = Cursors.Hand;
 
-            ToolTip toolTip = new ToolTip();
-            toolTip.AutoPopDelay = 5000;
-            toolTip.InitialDelay = 800;
-            toolTip.ReshowDelay = 500;
-            toolTip.ShowAlways = true;
+            ToolTip toolTip = new ToolTip
+            {
+                AutoPopDelay = 5000,
+                InitialDelay = 800,
+                ReshowDelay = 500,
+                ShowAlways = true
+            };
             toolTip.SetToolTip(label, "Visit Website");
             toolTip.SetToolTip(pictureBox, "Visit Website");
             toolTip.SetToolTip(panel, "View User Profile");
