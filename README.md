@@ -20,7 +20,7 @@ Emora is an OSINT tool like sherlock, which can find out on which sites a userna
 
 ### Using setup
 
-If you don't want to or can't build the software yourself, you can download its setup [here](https://github.com/Prescoter/Emora-Project/releases/tag/v1.0)
+If you don't want to or can't build the software yourself, you can download its setup/portable version [here](https://github.com/Prescoter/Emora-Project/releases/tag/v1.1)
 
 ### Building from source
 
@@ -29,7 +29,7 @@ In order to build the software, you need to install **Visual Studio 2022 or** hi
 ## Features
 
 - **Intuitive User Interface**: Emora offers a user-friendly graphical interface, making search and result exploration more accessible.
-- **Search Across Multiple Sites**: The tool queries a variety of popular websites to determine if the specified username is being used.
+- **Search Across Multiple Sites**: The tool queries a variety of popular websites (46 for now) to determine if the specified username is being used.
 - **Frequently updated**: Emora is a brand new open source project, and will be updated regularly!
 
 ## FAQ
