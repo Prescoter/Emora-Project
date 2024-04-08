@@ -20,7 +20,7 @@ Emora is an OSINT tool like sherlock, which can find out on which sites a userna
 
 ### Using setup
 
-If you don't want to or can't build the software yourself, you can download its setup [here](https://github.com/Prescoter/Emora-Project/releases/download/v1.0/EmoraSetup.exe)
+If you don't want to or can't build the software yourself, you can download its setup [here](https://github.com/Prescoter/Emora-Project/releases/tag/v1.0)
 
 ### Building from source
 
