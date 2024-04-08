@@ -169,7 +169,6 @@ namespace Emora
                     var content = await response.Content.ReadAsStringAsync();
                     if (!content.Contains(websiteInfo.ErrorMessage))
                     {
-                        MessageBox.Show(content);
                         AddResult(websiteName, url);
                     }
                 }
