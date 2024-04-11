@@ -11,7 +11,8 @@
 - [Features](#features)
 - [FAQ](#faq)
 
-Emora is an OSINT tool like sherlock, which can find out on which sites a username is claimed or not.
+Emora is an OSINT tool like sherlock, which can find out on which sites a username is claimed or not.  
+We now have a discord server for the project! https://discord.gg/gKT6GT2YCS
 
 ## Showcase
 ![Emora Showcase](https://raw.githubusercontent.com/Prescoter/Emora-Project/main/EmoraShowcase.gif)
