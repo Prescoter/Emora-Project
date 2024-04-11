@@ -39,7 +39,7 @@ namespace Emora
             {"Pastebin", new WebsiteInfo {ErrorType = "status_code", Url = "https://pastebin.com/u/{}"}},
             {"Patreon", new WebsiteInfo {ErrorType = "status_code", Url = "https://www.patreon.com/{}"}},
             {"PyPi", new WebsiteInfo {ErrorType = "status_code", Url = "https://pypi.org/user/{}"}},
-            {"Reddit", new WebsiteInfo {ErrorType = "status_code", Url = "https://www.reddit.com/user/{}"}},
+            {"Reddit", new WebsiteInfo {ErrorType = "message", ErrorMessage = "{\"message\": \"Not Found\", \"error\": 404}", Url = "https://www.reddit.com/user/{}/about.json"}},
             {"Replit", new WebsiteInfo {ErrorType = "status_code", Url = "https://replit.com/@{}"}},
             {"Roblox", new WebsiteInfo {ErrorType = "status_code", Url = "https://www.roblox.com/user.aspx?username={}"}},
             {"RootMe", new WebsiteInfo {ErrorType = "status_code", Url = "https://www.root-me.org/{}"}},
@@ -117,6 +117,7 @@ namespace Emora
 
             using (var httpClient = new HttpClient())
             {
+                httpClient.Timeout = TimeSpan.FromSeconds(8);
                 httpClient.DefaultRequestHeaders.UserAgent.ParseAdd("Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:124.0) Gecko/20100101 Firefox/124.0");
                 var tasks = new List<Task>();
                 var semaphore = new SemaphoreSlim((int)numericUpDown1.Value);
